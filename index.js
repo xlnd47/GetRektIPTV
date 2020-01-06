@@ -31,6 +31,7 @@ bot.on("ready", () => {
 bot.on("message", async message => {
   //a little bit of data parsing/general checks
   if(message.author.bot) return;
+  if(message.content.indexOf(config.prefix) !== 0) return;
   if(message.channel.type === 'dm') return;
   let content = message.content.split(" ");
   let command = content[0];

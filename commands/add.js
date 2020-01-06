@@ -52,8 +52,9 @@ async function makeTrial(bot, id, message){
 
     var usrr = bot.fetchUser(id);
     var user = await usrr.then(result => result);
+    var u = (user.username+user.discriminator).replace(/ /g,"_")
     var form = {
-        username: user.username+"#"+user.discriminator
+        username: u
     }
 
     var formData = querystring.stringify(form);
@@ -97,32 +98,51 @@ async function sendEmbeded(bot, id, result, message){
 
 
     //console.log(result)
-
+    var expiredate = toHumanDate(result.expired_at);
+    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts"
+    //console.log(expiredate)
      const exampleEmbed = new Discord.RichEmbed()
          .setColor('#0099ff')
          .setTitle('Trial created for ' + user.username+"#"+user.discriminator)
-         .addField('User with id:', user.id)
-         .addField('Username:', result.username, true)
-         .addField('Password:', result.password, true)
-         .addField('Host:', config.hostUrl, true)
+         .addField('User with id', user.id)
+         .addField('Username', result.username, true)
+         .addField('Password', result.password, true)
+         .addField('Host', config.hostUrl, true)
+         .addField('m3u URL', url, true )
+         .addField('Expire date',expiredate, true)
          .setTimestamp()
-
      const privatedEmbed = new Discord.RichEmbed()
          .setColor('#0099ff')
          .setTitle('Trial account created for you')
-         .addField('Username:', result.username, true)
-         .addField('Password:', result.password, true)
-         .addField('Host:', config.hostUrl, true)
+         .addField('Username', result.username, true)
+         .addField('Password', result.password, true)
+         .addField('Host', config.hostUrl, true)
+         .addField('m3u URL', url, true )
+         .addField('Expire date',expiredate, true)
          .setTimestamp()
     
       bot.channels.get(config.logChannelId).send(exampleEmbed)
       message.reply(exampleEmbed)
+      bot.users.get(id).send(privatedEmbed).catch(
+          (error) => logError(error, user, bot))
+}
 
-      try {
-         bot.users.get(id).send(privatedEmbed).catch()
-      } catch (error) {
-         bot.channels.get(config.logChannelId).send("Failed to send private message to "+user.username+"#"+user.discriminator)
-      }
+function logError(error, user, bot){
+    const exampleEmbed = new Discord.RichEmbed()
+        .setColor('#ff0000')
+        .setTitle('Error for user ' + user.username+"#"+user.discriminator)
+        .addField('User with id', user.id)
+        .addField('Error', error.message, true)
+        .setTimestamp()
+
+    //console.log(error.message)
+    bot.channels.get(config.logChannelId).send(exampleEmbed)
+}
+
+function toHumanDate(timestamp){
+    var theDate = new Date(timestamp * 1000);
+    dateString = theDate.toGMTString();
+    return dateString
 }
 
 //name this whatever the command name is.
