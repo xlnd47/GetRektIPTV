@@ -1,0 +1,9 @@
+{
+  "prefix": "?",
+  "token": "",
+  "devID" : "",
+  "logChannelId" : "",
+  "apiKey" : "", 
+  "hostUrl" : "http://iptv-line.com:6969/", 
+  "m3uUrl" : "http://iptv-line.com:7899/get.php?"
+}
