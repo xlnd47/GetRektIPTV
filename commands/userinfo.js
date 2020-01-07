@@ -24,7 +24,10 @@ module.exports.run = async (bot, message, args) => {
 function getUserInfo(user, bot){
 
   //hier uw code tunahan!!
+  var createdDate = user.createdAt
+  var dateToday = new Date()
 
+  var daysOld = (dateToday.getTime() - createdDate.getTime()) / (1000 * 3600 * 24)
 
 
   const embed = new Discord.RichEmbed()
@@ -34,7 +37,8 @@ function getUserInfo(user, bot){
     * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
     */
     .setColor(0x00AE86)
-    .addField("Creation Date", user.createdAt)
+    .addField("Creation Date", createdDate)
+    .addField("Days old", daysOld)
     .setFooter("Tunahan is echt een boer ojooo")
 
     // .setImage("http://i.imgur.com/yVpymuV.png")
