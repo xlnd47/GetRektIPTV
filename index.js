@@ -26,6 +26,15 @@ jsfile.forEach((f, i) =>{
 
 bot.on("ready", () => {
   console.log(bot.user.username + " is online.")
+  bot.user.setPresence({
+    game: { 
+        name: 'my code',
+        type: 'WATCHING'
+    },
+    status: 'idle'
+})
+  
+
 });
 
 bot.on("message", async message => {
@@ -43,6 +52,7 @@ bot.on("message", async message => {
   let commandfile = bot.commands.get(command.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
 })
+
 
 
 bot.login(config.token)
