@@ -34,8 +34,8 @@ function getUserInfo(user, bot){
     * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
     */
     .setColor(0x00AE86)
-    .setDescription("Tunahan is echt een meisje ojooooo")
-    .setFooter("Tunahan kan echt niks ojooo")
+    .setDescription("Axel is echt een meisje ojooooo")
+    .setFooter("Axel is echt een boer ojooo")
     // .setImage("http://i.imgur.com/yVpymuV.png")
     // .setThumbnail("http://i.imgur.com/p2qNFag.png")
     // /*
