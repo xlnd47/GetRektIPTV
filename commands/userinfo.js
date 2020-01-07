@@ -38,7 +38,7 @@ function getUserInfo(user, bot){
     */
     .setColor(0x00AE86)
     .addField("Creation Date", createdDate)
-    .addField("Days old", daysOld)
+    .addField("Days old", Math.floor(daysOld))
     .setFooter("Tunahan is echt een boer ojooo")
 
     // .setImage("http://i.imgur.com/yVpymuV.png")
