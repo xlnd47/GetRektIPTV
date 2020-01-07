@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const config = require("../config.json")
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
@@ -16,14 +17,14 @@ module.exports.run = async (bot, message, args) => {
       return message.reply("Dit is geen user, bru").then(m => m.delete(10000))
   }
   
-  getUserInfo(user)
+  getUserInfo(user, bot)
 }
 
 
-function getUserInfo(user){
+function getUserInfo(user, bot){
 
-//hier uw code tunahan!!
-
+  //hier uw code tunahan!!
+  bot.channels.get(config.logChannelId).send("Verander mij naar iets nuttigs")
 
 }
 
