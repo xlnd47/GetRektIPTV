@@ -34,8 +34,9 @@ function getUserInfo(user, bot){
     * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
     */
     .setColor(0x00AE86)
-    .setDescription("Axel is echt een meisje ojooooo")
-    .setFooter("Axel is echt een boer ojooo")
+    .addField("Creation Date", user.createdAt)
+    .setFooter("Tunahan is echt een boer ojooo")
+
     // .setImage("http://i.imgur.com/yVpymuV.png")
     // .setThumbnail("http://i.imgur.com/p2qNFag.png")
     // /*
@@ -43,8 +44,7 @@ function getUserInfo(user, bot){
     // */
     // .setTimestamp()
     // .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
-    // .addField("This is a field title, it can hold 256 characters",
-    //   "This is a field value, it can hold 1024 characters.")
+     
     // /*
     // * Inline fields may not display as inline if the thumbnail and/or image is too big.
     // */
