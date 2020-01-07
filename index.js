@@ -34,15 +34,7 @@ bot.on("ready", () => {
     },
     status: 'idle'
 
-  })
-  // Get our server
-  var guild = bot.guilds.get('662553260804276264')
-
-  // Get our stats channels
-
-  var userCount = guild.memberCount;
-  var totalUsers = bot.channels.get('664082872860278785').setName({userCount + " total users"});
-  
+  }) 
 
 });
 
