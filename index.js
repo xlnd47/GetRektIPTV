@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const config = require("./config.json")
 const bot = new Discord.Client();
 const fs = require("fs");
+
 bot.commands = new Discord.Collection();
 if(config.token === "setmeplease") return console.log("Set your token up! Go to https://www.discordapp.com/developers and generate a token from a bot user.");
 
@@ -32,7 +33,15 @@ bot.on("ready", () => {
         type: 'WATCHING'
     },
     status: 'idle'
-})
+
+  })
+  // Get our server
+  var guild = bot.guilds.get('662553260804276264')
+
+  // Get our stats channels
+
+  var userCount = guild.memberCount;
+  var totalUsers = bot.channels.get('664082872860278785').setName({userCount + " total users"});
   
 
 });
