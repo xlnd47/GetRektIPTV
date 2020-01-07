@@ -127,6 +127,8 @@ function getPackage(plan){
             return "SIX_MONTHS"
         case 5:
             return "TWELVE_MONTHS"
+        case 6:
+            return "TWENTY_FOUR_MONTHS"
         default:
             return "NO_CHANGE"
     }
