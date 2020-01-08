@@ -4,7 +4,7 @@ const request = require('request');
 const querystring = require('querystring');
 const lodash = require('lodash');
 
-module.exports.run = async (bot, message, args, giveaways) => {
+module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
   await message.delete()
 

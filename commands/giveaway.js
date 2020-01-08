@@ -3,7 +3,7 @@ const config = require("../config.json")
 const ms = require("ms");
 
 
-module.exports.run = async (bot, message, args, giveaways) => {
+module.exports.run = async (bot, message, args) => {
 
     if (!message.member.roles.has(config.devID)){
         return message.reply("Don't try me bru").then(m => m.delete(10000))

@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-module.exports.run = async (bot, message, args, giveaways) => {
+module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
   await message.delete()
   return message.reply("Hi, Tunahan is een meisje").then(m => m.delete(10000))
