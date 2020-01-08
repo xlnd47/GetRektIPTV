@@ -61,7 +61,7 @@ function updateUserList(){
   var users = bot.guilds.get(config.getrektGuild).members.filter(member => !member.user.bot).size;
 
 
-  bot.guilds.get(config.getrektGuild).channels.find("id", config.userlistChannel).setName(users + " total users!");
+  bot.guilds.get(config.getrektGuild).channels.get(config.userlistChannel).setName(users + " total users!");
 
 }
 
