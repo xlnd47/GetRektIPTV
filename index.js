@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const config = require("./config.json")
 const bot = new Discord.Client();
 const fs = require("fs");
-giveaways = require("discord.js-giveaways")
+giveaways = require("discord-giveaways")
 
 bot.commands = new Discord.Collection();
 if(config.token === "setmeplease") return console.log("Set your token up! Go to https://www.discordapp.com/developers and generate a token from a bot user.");
