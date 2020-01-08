@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const config = require("./config.json")
 const bot = new Discord.Client();
 const fs = require("fs");
+giveaways = require("discord-giveaways")
 
 bot.commands = new Discord.Collection();
 if(config.token === "setmeplease") return console.log("Set your token up! Go to https://www.discordapp.com/developers and generate a token from a bot user.");
@@ -27,6 +28,20 @@ jsfile.forEach((f, i) =>{
 
 bot.on("ready", () => {
   console.log(bot.user.username + " is online.")
+  giveaways.launch(client, {
+    updateCountdownEvery: 5000,
+    botsCanWin: false,
+    ignoreIfHasPermission: [
+        "MANAGE_MESSAGES",
+        "MANAGE_GUILD",
+        "ADMINISTRATOR"
+    ],
+    embedColor: "#FF0000",
+    embedColorEnd: "#000000",
+    reaction: "🎉",
+    storage: __dirname+"/giveaways.json"
+  });
+
   bot.user.setPresence({
     game: { 
         name: 'my code',
@@ -51,7 +66,7 @@ bot.on("message", async message => {
 
   //checks if message contains a command and runs it
   let commandfile = bot.commands.get(command.slice(prefix.length));
-  if(commandfile) commandfile.run(bot,message,args);
+  if(commandfile) commandfile.run(bot,message,args, giveaways);
 })
 
 

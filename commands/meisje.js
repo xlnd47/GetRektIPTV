@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, giveaways) => {
   //this is where the actual code for the command goes
   return message.reply("Hi, Tunahan is een meisje")
 }

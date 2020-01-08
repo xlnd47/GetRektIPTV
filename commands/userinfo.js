@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const config = require("../config.json")
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, giveaways) => {
   //this is where the actual code for the command goes
   await message.delete()
   

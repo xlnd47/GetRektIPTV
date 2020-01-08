@@ -3,7 +3,7 @@ const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, giveaways) => {
     //this is where the actual code for the command goes
     await message.delete()
     //geen admin => oprotten bru
