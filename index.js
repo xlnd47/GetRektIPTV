@@ -54,7 +54,7 @@ bot.on("message", async message => {
   let commandfile = bot.commands.get(command.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
 })
-client.on("guildMemberAdd", (member) => {
+bot.on("guildMemberAdd", (member) => {
   updateUserList();
 });
 function updateUserList(){
