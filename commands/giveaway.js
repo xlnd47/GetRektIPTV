@@ -1,5 +1,7 @@
 const Discord = require('discord.js')
 const giveaways = require("discord.js-giveaway")
+const config = require("../config.json")
+
 
 module.exports.run = async (bot, message, args) => {
 
