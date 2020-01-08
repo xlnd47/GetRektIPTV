@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
     }
 
     giveaways.start(message.channel, {
-        time: ms(args[1]),
+        time: args[1],
         prize: args[0],
         winnersCount: parseInt(args[2])
     }).then((gData) => {
