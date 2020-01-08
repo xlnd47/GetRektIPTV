@@ -27,8 +27,6 @@ jsfile.forEach((f, i) =>{
 
 bot.on("ready", () => {
   console.log(bot.user.username + " is online.")
-  
-
   bot.user.setPresence({
     game: { 
         name: 'my code',
@@ -37,6 +35,7 @@ bot.on("ready", () => {
     status: 'idle'
 
   }) 
+  updateUserList();
 
 });
 
@@ -55,5 +54,16 @@ bot.on("message", async message => {
   let commandfile = bot.commands.get(command.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
 })
+client.on("guildMemberAdd", (member) => {
+  updateUserList();
+});
+function updateUserList(){
+  var users = bot.guilds.get(config.getrektGuild).members.filter(member => !member.user.bot).size;
+
+
+  bot.guilds.get(config.getrektGuild).channels.find("id", config.userlistChannel).setName(users + " total users!");
+
+}
+
 
 bot.login(config.token)
