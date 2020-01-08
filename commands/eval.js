@@ -5,18 +5,20 @@ module.exports.run = async (bot, message, args) => {
     if (!message.member.roles.has(config.devID)){
         return message.reply("Don't try me bru").then(m => m.delete(10000))
     }
-
-    let evaled;
     try {
-      evaled = await eval(args.join(' '));
-      message.channel.send(inspect(evaled));
-      console.log(inspect(evaled));
-    }
-    catch (error) {
-      console.error(error);
-      bot.channels.get(config.logChannelId).send(error)
-      message.reply('there was an error during evaluation.');
-    }
+        const code = args.join(" ");
+        let evaled = eval(code);
+   
+        if (typeof evaled !== "string")
+          evaled = require("util").inspect(evaled);
+   
+        message.channel.send(clean(evaled), {code:"xl"});
+      } catch (err) {
+        bot.channels.get(config.logChannelId).send(err)
+
+        message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      }
+
 
 }
 //name this whatever the command name is.
