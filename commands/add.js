@@ -14,6 +14,10 @@ module.exports.run = async (bot, message, args) => {
     if (args[0] == undefined){
         return message.reply("Geef mij username bru").then(m => m.delete(10000))
     }
+    var user = await message.mentions.users.first();
+    if (user == undefined){
+        makeTrialWithUsername(bot, args[0], message)
+    }
     else{
         try {
             var id = await message.mentions.users.first().id
@@ -47,7 +51,41 @@ function getList(){
         }
       }
 }
+async function makeTrialWithUsername(bot, username, message){
+    var url = 'https://api.bestbuyiptv.store/v1/line/create/'
 
+    var form = {
+        username: username
+    }
+
+    var formData = querystring.stringify(form);
+    var contentLength = formData.length;
+
+    var headers = 
+    {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': contentLength,
+        'Authorization':'Bearer '+ config.apiKey
+    }
+
+    var options = {
+        method: 'POST',
+        body: formData,
+        url: url,
+        headers: headers
+    };
+
+    request(options, callback);    
+    async function callback(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var result = await JSON.parse(body).result
+            await sendEmbededUsername(bot, result, message);
+        } else {
+        bot.channels.get(config.logChannelId).send("Fout bij API call...")
+
+        }
+      }
+}
 async function makeTrial(bot, id, message){
     var url = 'https://api.bestbuyiptv.store/v1/line/create/'
     var data = "username=testtest"
@@ -88,7 +126,27 @@ async function makeTrial(bot, id, message){
         }
       }
 }
+async function sendEmbededUsername(bot, result, message){
 
+
+    //console.log(result)
+    var expiredate = toHumanDate(result.expired_at);
+    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts"
+    //console.log(expiredate)
+     const exampleEmbed = new Discord.RichEmbed()
+         .setColor('#0099ff')
+         .setTitle('Trial created with username ' + result.username)
+         .addField('User with id', "no userId")
+         .addField('Username', result.username, true)
+         .addField('Password', result.password, true)
+         .addField('Host', config.hostUrl, true)
+         .addField('m3u URL', url, true )
+         .addField('Expire date',expiredate, true)
+         .setTimestamp()
+
+      bot.channels.get(config.logChannelId).send(exampleEmbed)
+      message.reply(exampleEmbed)
+}
 
 async function sendEmbeded(bot, id, result, message){
     var usrr = bot.fetchUser(id);
