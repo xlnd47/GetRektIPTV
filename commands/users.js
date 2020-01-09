@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     }
     else{
         console.log("zoeken op username: " + args[0])
-        userOphalen(bot, args[0])
+        userOphalen(bot, args[0], message)
 
 
     }
@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
   
 }
 
-async function userOphalen(bot, usernme){
+async function userOphalen(bot, usernme, message){
 
     var url = 'https://api.bestbuyiptv.store/v1/line/list/'
     var form = {
@@ -80,6 +80,8 @@ async function userOphalen(bot, usernme){
                     .setTimestamp()
 
                 bot.channels.get(config.logChannelId).send(exampleEmbed)
+                message.reply(exampleEmbed)
+
 
 
             }
