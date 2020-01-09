@@ -137,5 +137,7 @@ function getPackage(plan){
 
 //name this whatever the command name is.
 module.exports.help = {
-  name: "update"
+  name: "update",
+  description: "Updates username with given plannumber"
+
 }

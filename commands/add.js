@@ -208,5 +208,6 @@ function toHumanDate(timestamp){
 
 //name this whatever the command name is.
 module.exports.help = {
-  name: "add"
+  name: "add",
+  description: "Add user by mention with ?add @mention or add user by username with ?add username"
 }

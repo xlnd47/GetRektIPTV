@@ -70,5 +70,7 @@ function getUserInfo(user, bot){
 
 //name this whatever the command name is.
 module.exports.help = {
-  name: "userinfo"
+  name: "userinfo",
+  description: "Gives info about the @mention"
+
 }

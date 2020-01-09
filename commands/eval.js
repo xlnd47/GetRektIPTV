@@ -30,5 +30,7 @@ function clean(text) {
   }
 //name this whatever the command name is.
 module.exports.help = {
-  name: "eval"
+  name: "eval",
+  description: "Evaluation command, only for developers"
+
 }

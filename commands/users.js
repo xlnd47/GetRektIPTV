@@ -161,5 +161,7 @@ function toHumanDate(timestamp){
 
 //name this whatever the command name is.
 module.exports.help = {
-  name: "users"
+  name: "users",
+  description: "Gives all users with a plan, with ?users username   gives info about that user."
+
 }
