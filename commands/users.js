@@ -20,7 +20,6 @@ module.exports.run = async (bot, message, args) => {
         allesOphalen(bot);
     }
     else{
-        console.log("zoeken op username: " + args[0])
         userOphalen(bot, args[0], message)
 
 
@@ -58,13 +57,11 @@ async function userOphalen(bot, usernme, message){
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
             var data = await JSON.parse(body).result.data
-            console.log(data)
 
             //var picked = lodash.filter(data, x => x.username == usernme);
 
             var first = lodash.filter(data, x => x.username == usernme);
             var picked = first[0]
-            console.log(picked)
             if(picked !=[]){
                 var url = config.m3uUrl + "username=" + picked.username +  "&password="+picked.password+"&type=m3u_plus&output=mpegts"
                 var expiredate = toHumanDate(picked.expired_at);
@@ -87,7 +84,6 @@ async function userOphalen(bot, usernme, message){
             }
             
 
-            //console.log(data)
             
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
@@ -125,26 +121,19 @@ async function allesOphalen(bot){
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = await JSON.parse(body).result
-            //console.log(result)
             var data = await result.data
                 
             var fields = new Array();
 
 
-            console.log(data.length)
             for (var i = 0; i < data.length; i++){
                 fields.push(
-                    // {
-                    //     name: "ID",
-                    //     value: data[i].id
-                    // },
                     {
                         name: data[i].username,
                         value: data[i].status + " " + toHumanDate(data[i].expired_at)
                     }
                     )
             }                
-            //console.log(fields)
 
 
             bot.channels.get(config.logChannelId).send({embed: {
