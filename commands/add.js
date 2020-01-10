@@ -145,7 +145,8 @@ async function sendEmbededUsername(bot, result, message){
          .setTimestamp()
 
       bot.channels.get(config.logChannelId).send(exampleEmbed)
-      message.reply(exampleEmbed).pin()
+      var messageToPin = await message.reply(exampleEmbed)
+      await messageToPin.pin()
 }
 
 async function sendEmbeded(bot, id, result, message){
