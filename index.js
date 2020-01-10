@@ -36,7 +36,7 @@ bot.on("ready", () => {
 
   }) 
   updateUserList();
-  bot.channels.get(config.logChannelId).send("@Admin, ik ben opnieuw opgestart!")
+  bot.channels.get(config.logChannelId).send("Ik ben opnieuw opgestart!")
 
 });
 
