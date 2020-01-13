@@ -109,7 +109,7 @@ async function allesOphalen(bot){
     var headers = 
     {
         'Authorization':'Bearer '+ config.apiKey,
-        'limit' :'100'
+        'limit' : 100
     }
 
     var options = {
