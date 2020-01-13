@@ -61,13 +61,6 @@ async function userOphalen(bot, usernme, message){
             }
       });    
 }
-
-
-function toHumanDate(timestamp){
-    var theDate = new Date(timestamp * 1000);
-    dateString = theDate.toGMTString();
-    return dateString
-}
 async function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) throw err;
