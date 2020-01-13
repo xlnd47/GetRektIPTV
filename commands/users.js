@@ -108,7 +108,7 @@ async function allesOphalen(bot){
     var url = 'https://api.bestbuyiptv.store/v1/line/list/'
     var headers = 
     {
-        'Authorization':'Bearer '+ config.apiKey,
+        'Authorization:Bearer ' + config.apiKey,
         'Content-Type :application/x-www-form-urlencoded',
         'limit : 100'
     }
