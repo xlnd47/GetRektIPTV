@@ -35,20 +35,25 @@ module.exports.run = async (bot, message, args) => {
   
 }
 
-async function userOphalen(bot, usernme, message){
+function userOphalen(bot, usernme, message){
 
     con.query("SELECT * FROM users WHERE username = '" + usernme +"'", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
   
         var first = result[0];
             if(first !=[]){
                 var url = config.m3uUrl + "username=" + first.username +  "&password="+first.password+"&type=m3u_plus&output=mpegts"
-
+                var dId;
+                if (first.discordId !=""){
+                    dId = first.discordId;
+                }else{
+                    did = "no discordId"
+                }
                 const exampleEmbed = new Discord.RichEmbed()
                     .setColor('#0099ff')
                     .setTitle('Info for user ' + first.username)
                     .addField('Username', first.username, true)
+                    .addField('UserId',dId , true)
                     .addField('Password', first.password, true)
                     .addField('Host', config.hostUrl, true)
                     .addField('m3u URL', url, true )
@@ -60,7 +65,10 @@ async function userOphalen(bot, usernme, message){
             }
       });    
 }
-async function allesOphalenDb(bot){
+
+
+
+function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) throw err;
       console.log(result);
