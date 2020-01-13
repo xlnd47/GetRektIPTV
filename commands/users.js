@@ -111,11 +111,21 @@ async function allesOphalen(bot){
          'Authorization':'Bearer' + config.apiKey
     }
 
+    // var options = {
+    //     method: 'GET',
+    //     url: url,
+    //     headers: headers
+    // };
+
     var options = {
-        method: 'GET',
-        url: url,
-        headers: headers
-    };
+        'method': 'GET',
+        'url': 'https://api.bestbuyiptv.store/v1/line/list',
+        'headers': {
+          'Authorization': 'Bearer nx1Iq4wDIE39F0bwiE2pmN0-EHHy7giq',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'limit': '100'
+        }
+      };
 
     request(options, callback);    
     async function callback(error, response, body) {
