@@ -128,9 +128,10 @@ async function allesOphalen(bot){
       };
 
     request(options, callback);    
-    async function callback(error, response, body) {
+    async function callback(error, response) {
         if (!error && response.statusCode == 200) {
-            var result = await JSON.parse(body).result
+            console.log(response.body);
+            var result = await JSON.parse(response.body).result
             var data = await result.data
                 
             var fields = new Array();
