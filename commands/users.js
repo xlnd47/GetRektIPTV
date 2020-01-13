@@ -108,8 +108,6 @@ function toHumanDate(timestamp){
     return dateString
 }
 async function allesOphalenDb(bot){
-  con.connect(function(err) {
-    if (err) throw err;
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) throw err;
       console.log(result);
@@ -134,11 +132,10 @@ async function allesOphalenDb(bot){
         timestamp: new Date()
         }});
 
-    con.end();
 
 
     });
-  });
+
 
 
 }
