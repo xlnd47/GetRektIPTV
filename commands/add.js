@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
+const mysql = require('mysql');
+
 var con = mysql.createConnection({
     host: "localhost",
     user: config.dbUser,
