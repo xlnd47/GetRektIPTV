@@ -3,7 +3,6 @@ const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
 const lodash = require('lodash');
-
 const mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
@@ -12,7 +11,6 @@ var con = mysql.createConnection({
     database : "iptv"
   });
 
-
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
     await message.delete()
@@ -20,19 +18,12 @@ module.exports.run = async (bot, message, args) => {
     if (!message.member.roles.has(config.devID)){
         return message.reply("Don't try me bru").then(m => m.delete(10000))
     }
-
-
     if (args[0] == undefined){
         allesOphalenDb(bot);
     }
     else{
         userOphalen(bot, args[0], message)
-
-
     }
-
-
-  
 }
 
 function userOphalen(bot, usernme, message){
@@ -43,12 +34,6 @@ function userOphalen(bot, usernme, message){
         var first = result[0];
             if(first !=[]){
                 var url = config.m3uUrl + "username=" + first.username +  "&password="+first.password+"&type=m3u_plus&output=mpegts"
-                var dId;
-                if (first.discordId !=""){
-                    dId = first.discordId;
-                }else{
-                    did = "no discordId"
-                }
                 const exampleEmbed = new Discord.RichEmbed()
                     .setColor('#0099ff')
                     .setTitle('Info for user ' + first.username)
@@ -72,8 +57,6 @@ function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) throw err;
       console.log(result);
-
-
       var fields = new Array();
 
       result.forEach(x => {
@@ -92,21 +75,7 @@ function allesOphalenDb(bot){
         fields: fields,
         timestamp: new Date()
         }});
-
-
-
     });
-
-
-
-}
-
-
-
-function toHumanDate(timestamp){
-    var theDate = new Date(timestamp * 1000);
-    dateString = theDate.toGMTString();
-    return dateString
 }
 
 //name this whatever the command name is.
