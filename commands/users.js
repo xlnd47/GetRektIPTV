@@ -38,7 +38,7 @@ function userOphalen(bot, usernme, message){
                     .setColor('#0099ff')
                     .setTitle('Info for user ' + first.username)
                     .addField('Username', first.username, true)
-                    .addField('UserId',dId , true)
+                    .addField('UserId',first.discordId , true)
                     .addField('Password', first.password, true)
                     .addField('Host', config.hostUrl, true)
                     .addField('m3u URL', url, true )
