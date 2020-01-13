@@ -127,12 +127,12 @@ async function allesOphalenDb(bot){
             )
       });
 
-      bot.channels.get(config.logChannelId).send({embed: {
-        color: 3447003,
-        title: fields.length + " users",
-        fields: fields,
-        timestamp: new Date()
-        }});
+    //   bot.channels.get(config.logChannelId).send({embed: {
+    //     color: 3447003,
+    //     title: fields.length + " users",
+    //     fields: fields,
+    //     timestamp: new Date()
+    //     }});
 
 
 
