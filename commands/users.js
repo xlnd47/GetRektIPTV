@@ -37,40 +37,14 @@ module.exports.run = async (bot, message, args) => {
 
 async function userOphalen(bot, usernme, message){
 
-    var url = 'https://api.bestbuyiptv.store/v1/line/list/'
-    var form = {
-        'Line[username]': usernme
-    }
-
-    var formData = querystring.stringify(form);
-    var contentLength = formData.length;
-    var headers = 
-    {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': contentLength,
-        'Authorization':'Bearer '+ config.apiKey
-    }
-
-    var options = {
-        method: 'GET',
-        body: formData,
-        url: url,
-        headers: headers
-    };
-
-
-    request(options, callback);    
-    async function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var data = await JSON.parse(body).result.data
-
-            //var picked = lodash.filter(data, x => x.username == usernme);
-
-            var first = lodash.filter(data, x => x.username == usernme);
+    con.query("SELECT * FROM users", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+  
+        var first = lodash.filter(result, x => x.username == usernme);
             var picked = first[0]
             if(picked !=[]){
                 var url = config.m3uUrl + "username=" + picked.username +  "&password="+picked.password+"&type=m3u_plus&output=mpegts"
-                var expiredate = toHumanDate(picked.expired_at);
 
                 const exampleEmbed = new Discord.RichEmbed()
                     .setColor('#0099ff')
@@ -79,26 +53,13 @@ async function userOphalen(bot, usernme, message){
                     .addField('Password', picked.password, true)
                     .addField('Host', config.hostUrl, true)
                     .addField('m3u URL', url, true )
-                    .addField('Expire date',expiredate, true)
+                    .addField('Expire date',picked.expiredAt, true)
                     .setTimestamp()
 
                 bot.channels.get(config.logChannelId).send(exampleEmbed)
                 message.reply(exampleEmbed)
-
-
-
             }
-            
-
-            
-        } else {
-        bot.channels.get(config.logChannelId).send("Fout bij API call...")
-
-        } 
-    }
-
-
-    
+      });    
 }
 
 
@@ -141,65 +102,6 @@ async function allesOphalenDb(bot){
 }
 
 
-async function allesOphalen(bot){
-    var url = 'https://api.bestbuyiptv.store/v1/line/list/'
-    var headers = 
-    {
-         'Authorization':'Bearer' + config.apiKey
-    }
-
-    // var options = {
-    //     method: 'GET',
-    //     url: url,
-    //     headers: headers
-    // };
-
-    var options = {
-        'method': 'GET',
-        'url': 'https://api.bestbuyiptv.store/v1/line/list',
-        'headers': {
-          'Authorization': 'Bearer nx1Iq4wDIE39F0bwiE2pmN0-EHHy7giq',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'limit': '100'
-        }
-      };
-
-    request(options, callback);    
-    async function callback(error, response) {
-        if (!error && response.statusCode == 200) {
-            console.log(response.body);
-            var result = await JSON.parse(response.body).result
-            var data = await result.data
-                
-            var fields = new Array();
-
-
-            for (var i = 0; i < data.length; i++){
-                fields.push(
-                    {
-                        name: data[i].username,
-                        value: data[i].status + " " + toHumanDate(data[i].expired_at)
-                    }
-                    )
-            }                
-
-
-            bot.channels.get(config.logChannelId).send({embed: {
-                color: 3447003,
-                title: data.length + " users",
-                fields: fields,
-                timestamp: new Date()
-              }
-            })
-
-
-        } else {
-        bot.channels.get(config.logChannelId).send("Fout bij API call...")
-
-        }
-      }
-
-}
 
 function toHumanDate(timestamp){
     var theDate = new Date(timestamp * 1000);
