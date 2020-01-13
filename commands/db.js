@@ -62,7 +62,7 @@ async function allesOphalen(bot){
             var data = await result.data
             var sql = "INSERT INTO users(username, password, expiredAt) VALUES "
             for (var i = 0; i < data.length; i++){
-                sql += "('" + data[i].username + "',"+data[i].password+"',FROM_UNIXTIME("+ data[i].expired_at + ")),";
+                sql += "('" + data[i].username + "','"+data[i].password+"',FROM_UNIXTIME("+ data[i].expired_at + ")),";
             } 
             console.log(sql);
 
