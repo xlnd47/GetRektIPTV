@@ -139,6 +139,8 @@ async function allesOphalenDb(bot){
     });
   });
 
+  con.end();
+
 }
 
 
