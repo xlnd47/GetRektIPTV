@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const request = require('request');
 const config = require("../config.json");
 const mysql = require('mysql');
 var users = new Array();;
