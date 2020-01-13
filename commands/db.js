@@ -12,9 +12,15 @@ module.exports.run = async (bot, message, args) => {
     password: config.dbPassword
   });
 
+
+
   con.connect(function(err) {
     if (err) throw err;
-  return message.reply("Connected!").then(m => m.delete(10000))
+    message.reply("Connected!").then(m => m.delete(10000))
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      message.reply("Result: " + result).then(m => m.delete(10000))
+    });
   });
 
 
