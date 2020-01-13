@@ -13,13 +13,11 @@ module.exports.run = async (bot, message, args) => {
   });
 
 
-
   con.connect(function(err) {
     if (err) throw err;
-    message.reply("Connected!").then(m => m.delete(10000))
-    con.query(sql, function (err, result) {
+    con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) throw err;
-      message.reply("Result: " + result).then(m => m.delete(10000))
+      console.log(result);
     });
   });
 
