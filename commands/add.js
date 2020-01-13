@@ -2,7 +2,12 @@ const Discord = require('discord.js')
 const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
-
+var con = mysql.createConnection({
+    host: "localhost",
+    user: config.dbUser,
+    password: config.dbPassword,
+    database : "iptv"
+  });
 module.exports.run = async (bot, message, args) => {
     //this is where the actual code for the command goes
     await message.delete()
@@ -147,6 +152,14 @@ async function sendEmbededUsername(bot, result, message){
       bot.channels.get(config.logChannelId).send(exampleEmbed)
       var messageToPin = await message.reply(exampleEmbed)
       await messageToPin.pin()
+
+
+      var sql = "INSERT INTO users(username, password, expiredAt) VALUES ('" + result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+      });
+
 }
 
 async function sendEmbeded(bot, id, result, message){
