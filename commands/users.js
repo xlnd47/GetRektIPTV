@@ -122,17 +122,17 @@ async function allesOphalenDb(bot){
           fields.push(
             {
                 name: x.username,
-                value: x.expired_at
+                value: x.expiredAt
             }
             )
       });
 
-    //   bot.channels.get(config.logChannelId).send({embed: {
-    //     color: 3447003,
-    //     title: fields.length + " users",
-    //     fields: fields,
-    //     timestamp: new Date()
-    //     }});
+      bot.channels.get(config.logChannelId).send({embed: {
+        color: 3447003,
+        title: fields.length + " users",
+        fields: fields,
+        timestamp: new Date()
+        }});
 
 
 
