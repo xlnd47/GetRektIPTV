@@ -109,8 +109,8 @@ async function allesOphalen(bot){
     var headers = 
     {
         'Authorization':'Bearer '+ config.apiKey,
-        'Content-Type':'application/x-www-form-urlencoded',
-         limit : 100
+        'Content-Type :application/x-www-form-urlencoded',
+        'limit : 100'
     }
 
     var options = {
