@@ -106,10 +106,9 @@ function toHumanDate(timestamp){
 
 async function allesOphalen(bot){
     var url = 'https://api.bestbuyiptv.store/v1/line/list/'
-    var auth = "Authorization:Bearer " + config.apiKey
     var headers = 
     {
-         auth
+         'Authorization':'Bearer' + config.apiKey
     }
 
     var options = {
