@@ -134,12 +134,12 @@ async function allesOphalenDb(bot){
         timestamp: new Date()
         }});
 
+    con.end();
 
 
     });
   });
 
-  con.end();
 
 }
 
