@@ -109,9 +109,7 @@ async function allesOphalen(bot){
     var auth = "Authorization:Bearer " + config.apiKey
     var headers = 
     {
-         auth,
-        'Content-Type :application/x-www-form-urlencoded',
-        'limit : 100'
+         auth
     }
 
     var options = {
