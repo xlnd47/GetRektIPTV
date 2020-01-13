@@ -9,7 +9,8 @@ module.exports.run = async (bot, message, args) => {
   var con = mysql.createConnection({
     host: "localhost",
     user: config.dbUser,
-    password: config.dbPassword
+    password: config.dbPassword,
+    database : "iptv"
   });
 
 
