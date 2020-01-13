@@ -4,7 +4,13 @@ const request = require('request');
 const querystring = require('querystring');
 const lodash = require('lodash');
 
-
+const mysql = require('mysql');
+var con = mysql.createConnection({
+    host: "localhost",
+    user: config.dbUser,
+    password: config.dbPassword,
+    database : "iptv"
+  });
 
 
 module.exports.run = async (bot, message, args) => {
@@ -17,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
 
 
     if (args[0] == undefined){
-        allesOphalen(bot);
+        allesOphalenDb(bot);
     }
     else{
         userOphalen(bot, args[0], message)
@@ -101,7 +107,39 @@ function toHumanDate(timestamp){
     dateString = theDate.toGMTString();
     return dateString
 }
+async function allesOphalenDb(bot){
+  con.connect(function(err) {
+    if (err) throw err;
+    con.query("SELECT * FROM users", function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
 
+
+      var fields = new Array();
+
+      result.forEach(x => {
+          console.log(x.username);
+          fields.push(
+            {
+                name: x.username,
+                value: x.expired_at
+            }
+            )
+      });
+
+      bot.channels.get(config.logChannelId).send({embed: {
+        color: 3447003,
+        title: fields.length + " users",
+        fields: fields,
+        timestamp: new Date()
+        }});
+
+
+
+    });
+  });
+
+}
 
 
 async function allesOphalen(bot){
