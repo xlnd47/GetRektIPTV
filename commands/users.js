@@ -37,28 +37,28 @@ module.exports.run = async (bot, message, args) => {
 
 async function userOphalen(bot, usernme, message){
 
-    con.query("SELECT * FROM users", function (err, result, fields) {
+    con.query("SELECT * FROM users WHERE username = '" + usernme +"'", function (err, result, fields) {
         if (err) throw err;
         console.log(result);
   
-        var first = lodash.filter(result, x => x.username == usernme);
-            var picked = first[0]
-            if(picked !=[]){
-                var url = config.m3uUrl + "username=" + picked.username +  "&password="+picked.password+"&type=m3u_plus&output=mpegts"
+        // var first = lodash.filter(result, x => x.username == usernme);
+        //     var picked = first[0]
+        //     if(picked !=[]){
+        //         var url = config.m3uUrl + "username=" + picked.username +  "&password="+picked.password+"&type=m3u_plus&output=mpegts"
 
-                const exampleEmbed = new Discord.RichEmbed()
-                    .setColor('#0099ff')
-                    .setTitle('Info for user ' + picked.username)
-                    .addField('Username', picked.username, true)
-                    .addField('Password', picked.password, true)
-                    .addField('Host', config.hostUrl, true)
-                    .addField('m3u URL', url, true )
-                    .addField('Expire date',picked.expiredAt, true)
-                    .setTimestamp()
+        //         const exampleEmbed = new Discord.RichEmbed()
+        //             .setColor('#0099ff')
+        //             .setTitle('Info for user ' + picked.username)
+        //             .addField('Username', picked.username, true)
+        //             .addField('Password', picked.password, true)
+        //             .addField('Host', config.hostUrl, true)
+        //             .addField('m3u URL', url, true )
+        //             .addField('Expire date',picked.expiredAt, true)
+        //             .setTimestamp()
 
-                bot.channels.get(config.logChannelId).send(exampleEmbed)
-                message.reply(exampleEmbed)
-            }
+        //         bot.channels.get(config.logChannelId).send(exampleEmbed)
+        //         message.reply(exampleEmbed)
+        //     }
       });    
 }
 async function allesOphalenDb(bot){
