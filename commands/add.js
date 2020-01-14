@@ -34,30 +34,12 @@ module.exports.run = async (bot, message, args) => {
             bot.channels.get(config.logChannelId).send(error)
         }
     }
+
+
+    con.end();
+
 }
 
-function getList(){
-    var url = 'https://api.bestbuyiptv.store/v1/bouquet/list/'
-    var headers = {'Authorization':'Bearer '+config.apiKey}
-    var data = 'name=Brazil'
-
-    var options = {
-        method: 'POST',
-        body: data,
-        url: url,
-        headers: headers
-    };
-
-    request(options, callback);    
-    
-    
-    
-    function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          console.log(JSON.parse(body))
-        }
-      }
-}
 async function makeTrialWithUsername(bot, username, message){
     var url = 'https://api.bestbuyiptv.store/v1/line/create/'
 

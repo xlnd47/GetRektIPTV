@@ -24,6 +24,9 @@ module.exports.run = async (bot, message, args) => {
     else{
         userOphalen(bot, args[0], message)
     }
+
+    con.end();
+
 }
 
 function userOphalen(bot, usernme, message){
@@ -50,7 +53,6 @@ function userOphalen(bot, usernme, message){
             }
       });
       
-    con.end();
 }
 
 
