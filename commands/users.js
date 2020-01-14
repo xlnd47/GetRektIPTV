@@ -48,7 +48,9 @@ function userOphalen(bot, usernme, message){
                 bot.channels.get(config.logChannelId).send(exampleEmbed)
                 message.reply(exampleEmbed)
             }
-      });    
+      });
+      
+    con.end();
 }
 
 
