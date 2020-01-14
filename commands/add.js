@@ -34,10 +34,6 @@ module.exports.run = async (bot, message, args) => {
             bot.channels.get(config.logChannelId).send(error)
         }
     }
-
-
-    con.end();
-
 }
 
 async function makeTrialWithUsername(bot, username, message){
@@ -140,7 +136,7 @@ async function sendEmbededUsername(bot, result, message){
 
       var sql = "INSERT INTO users(username, password, expiredAt) VALUES ('" + result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
       con.query(sql, function (err, result) {
-        if (err) throw err;
+        if (err) console.log(err);
         console.log("1 record inserted");
       });
 
@@ -185,7 +181,7 @@ async function sendEmbeded(bot, id, result, message){
       await messageToPin.pin()
       var sql = "INSERT INTO users(discordId, username, password, expiredAt) VALUES ('" + user.id + "','"+ result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
       con.query(sql, function (err, result) {
-        if (err) throw err;
+        if (err) console.log(err);
         console.log("1 record inserted");
       });
 

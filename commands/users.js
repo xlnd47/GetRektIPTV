@@ -25,14 +25,13 @@ module.exports.run = async (bot, message, args) => {
         userOphalen(bot, args[0], message)
     }
 
-    con.end();
 
 }
 
 function userOphalen(bot, usernme, message){
 
     con.query("SELECT * FROM users WHERE username = '" + usernme +"'", function (err, result, fields) {
-        if (err) throw err;
+        if (err) console.log(err);
   
         var first = result[0];
             if(first !=[]){
@@ -59,7 +58,7 @@ function userOphalen(bot, usernme, message){
 
 function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
-      if (err) throw err;
+      if (err) console.log(err);
       console.log(result);
       var fields = new Array();
 
