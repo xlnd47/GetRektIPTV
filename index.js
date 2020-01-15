@@ -23,7 +23,12 @@ jsfile.forEach((f, i) =>{
 });
 
 });
-
+var con = mysql.createConnection({
+  host: "localhost",
+  user: config.dbUser,
+  password: config.dbPassword,
+  database : "iptv"
+});
 
 bot.on("ready", () => {
   console.log(bot.user.username + " is online.")
@@ -53,7 +58,7 @@ bot.on("message", async message => {
 
   //checks if message contains a command and runs it
   let commandfile = bot.commands.get(command.slice(prefix.length));
-  if(commandfile) commandfile.run(bot,message,args);
+  if(commandfile) commandfile.run(bot,message,args, con);
 })
 
 bot.on("guildMemberAdd", (member) => {

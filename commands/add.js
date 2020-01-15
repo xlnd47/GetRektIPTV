@@ -3,16 +3,12 @@ const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
 const mysql = require('mysql');
+var con;
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: config.dbUser,
-    password: config.dbPassword,
-    database : "iptv"
-  });
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, conn) => {
     //this is where the actual code for the command goes
     await message.delete()
+    con = conn;
     //geen admin => oprotten bru
     if (!message.member.roles.has(config.devID)){
         return message.reply("Don't try me bru").then(m => m.delete(10000))

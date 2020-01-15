@@ -3,14 +3,9 @@ const request = require('request');
 const config = require("../config.json");
 const mysql = require('mysql');
 var users = new Array();;
-var con = mysql.createConnection({
-    host: "localhost",
-    user: config.dbUser,
-    password: config.dbPassword,
-    database : "iptv"
-  });
 
-module.exports.run = async (bot, message, args) => {
+
+module.exports.run = async (bot, message, args, con) => {
   //this is where the actual code for the command goes
   await message.delete()
 
