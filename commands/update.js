@@ -28,12 +28,6 @@ module.exports.run = async (bot, message, args, conn) => {
 }
 
 async function updateUser(user, plan,message){
-
-    var userId = await getUserId(user, plan,message)
-}
-
-
-async function getUserId(user, plan,message){
     var url = 'https://api.bestbuyiptv.store/v1/line/list/'
     var id = 0
     var form = {
