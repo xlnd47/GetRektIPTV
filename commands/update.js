@@ -3,11 +3,12 @@ const config = require("../config.json")
 const request = require('request');
 const querystring = require('querystring');
 const lodash = require('lodash');
+var con;
 
-module.exports.run = async (bot, message, args, con) => {
+module.exports.run = async (bot, message, args, conn) => {
   //this is where the actual code for the command goes
   await message.delete()
-
+    con = conn;
   if (!message.member.roles.has(config.devID)){
     return message.reply("Don't try me bru").then(m => m.delete(10000))
     }
@@ -104,10 +105,16 @@ async function updatenUser(id,plan,message){
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
             var data = await JSON.parse(body).result
+
+
+            var sql = `update users set expiredAt = FROM_UNIXTIME(${data.expired_at}) where username = ${data.username}`;
+            con.query(sql, function (err, result) {
+              if (err) console.log(err);
+              console.log("1 record updated");
+            });
            
             return message.reply(data.username + " updated!").then(m => m.delete(20000))
 
-            console.log(data)
             
         }
     }
