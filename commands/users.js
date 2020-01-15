@@ -54,11 +54,9 @@ function userOphalen(bot, usernme, message){
 function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) console.log(err);
-      console.log(result);
       var fields = new Array();
 
       result.forEach(x => {
-          console.log(x.username);
           fields.push(
             {
                 name: x.username,
