@@ -29,22 +29,23 @@ function userOphalen(bot, usernme, message){
         if (err) console.log(err);
   
         var first = result[0];
-            if(first !=[]){
-                var url = config.m3uUrl + "username=" + first.username +  "&password="+first.password+"&type=m3u_plus&output=mpegts"
-                const exampleEmbed = new Discord.RichEmbed()
-                    .setColor('#0099ff')
-                    .setTitle('Info for user ' + first.username)
-                    .addField('Username', first.username, true)
-                    .addField('UserId',first.discordId , true)
-                    .addField('Password', first.password, true)
-                    .addField('Host', config.hostUrl, true)
-                    .addField('m3u URL', url, true )
-                    .addField('Expire date',first.expiredAt, true)
-                    .setTimestamp()
+        console.log(first);
+        // if(first == undefined){
+        //     var url = config.m3uUrl + "username=" + first.username +  "&password="+first.password+"&type=m3u_plus&output=mpegts"
+        //     const exampleEmbed = new Discord.RichEmbed()
+        //         .setColor('#0099ff')
+        //         .setTitle('Info for user ' + first.username)
+        //         .addField('Username', first.username, true)
+        //         .addField('UserId',first.discordId , true)
+        //         .addField('Password', first.password, true)
+        //         .addField('Host', config.hostUrl, true)
+        //         .addField('m3u URL', url, true )
+        //         .addField('Expire date',first.expiredAt, true)
+        //         .setTimestamp()
 
-                bot.channels.get(config.logChannelId).send(exampleEmbed)
-                message.reply(exampleEmbed)
-            }
+        //     bot.channels.get(config.logChannelId).send(exampleEmbed)
+        //     message.reply(exampleEmbed)
+        // }
       });
       
 }
