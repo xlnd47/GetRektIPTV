@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, conn) => {
 
     var user = await message.mentions.users.first();
     if (user != undefined)
-        searchUserById(user, message);
+        return searchUserById(user, message);
 
 
     if (args[0] == undefined){
