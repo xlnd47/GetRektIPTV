@@ -20,14 +20,9 @@ module.exports.run = async (bot, message, args, conn) => {
     if (args[1] == undefined){
         return message.reply("Geef mij een plan bru").then(m => m.delete(10000))
     }
-
-
     var user = args[0]
     var plan = args[1]
-
     await updateUser(user, plan,message)
-
-
 
 }
 
@@ -41,10 +36,6 @@ async function updateUser(user, plan,message){
     });
     
 }
-
-
-
-
 async function updatenUser(id,plan,message){
     var url = 'https://api.bestbuyiptv.store/v1/line/update'
     var package = getPackage(parseInt(plan))
@@ -91,7 +82,6 @@ async function updatenUser(id,plan,message){
 function giveCustomerRoll(){
 
 }
-
 
 function getPackage(plan){
     switch (plan) {
