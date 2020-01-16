@@ -4,6 +4,7 @@ const request = require('request');
 const querystring = require('querystring');
 const lodash = require('lodash');
 var con;
+var customerRollId;
 
 module.exports.run = async (bot, message, args, conn) => {
   //this is where the actual code for the command goes
@@ -25,6 +26,9 @@ module.exports.run = async (bot, message, args, conn) => {
     var plan = args[1]
 
     await updateUser(user, plan,message)
+
+
+
 }
 
 async function updateUser(user, plan,message){
@@ -106,13 +110,18 @@ async function updatenUser(id,plan,message){
               if (err) console.log(err);
               console.log("1 record updated");
             });
-           
+            giveCustomerRoll();
             return message.reply(data.username + " updated!").then(m => m.delete(20000))
 
             
         }
     }
 }
+
+function giveCustomerRoll(){
+
+}
+
 
 function getPackage(plan){
     switch (plan) {

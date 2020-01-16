@@ -130,7 +130,9 @@ async function sendEmbededUsername(bot, result, message){
       await messageToPin.pin()
 
 
-      var sql = "INSERT INTO users(username, password, expiredAt) VALUES ('" + result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
+      //var sql = "INSERT INTO users(username, password, expiredAt) VALUES ('" + result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
+      var sql = `INSERT INTO users(username, password, expiredAt, lineId) VALUES ("${result.username}", "${result.password}", FROM_UNIXTIME(${result.expired_at}), "${result.id}")`;
+
       con.query(sql, function (err, result) {
         if (err) console.log(err);
         console.log("1 record inserted");
@@ -175,7 +177,9 @@ async function sendEmbeded(bot, id, result, message){
       bot.channels.get(config.logChannelId).send(exampleEmbed)
       var messageToPin = await message.reply(exampleEmbed)
       await messageToPin.pin()
-      var sql = "INSERT INTO users(discordId, username, password, expiredAt) VALUES ('" + user.id + "','"+ result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
+      //var sql = "INSERT INTO users(discordId, username, password, expiredAt, lineId) VALUES ('" + user.id + "','"+ result.username + "','"+result.password+"',FROM_UNIXTIME("+ result.expired_at + "))";
+      var sql = `INSERT INTO users(discordId, username, password, expiredAt, lineId) VALUES ("${user.id}", "${result.username}", "${result.password}", FROM_UNIXTIME(${result.expired_at}), "${result.id}")`;
+      
       con.query(sql, function (err, result) {
         if (err) console.log(err);
         console.log("1 record inserted");
