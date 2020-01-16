@@ -36,7 +36,8 @@ async function updateUser(user, plan,message){
     var sql = `select lineId from users where username = "${user}"`;
     con.query(sql, function (err, result) {
         if (err) console.log(err);
-        console.log(result[0].lineId);
+        //console.log(result[0].lineId);
+        updatenUser(result[0].lineId, plan, message)
     });
     
 }
