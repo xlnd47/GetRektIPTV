@@ -13,15 +13,51 @@ module.exports.run = async (bot, message, args, conn) => {
     if (!message.member.roles.has(config.devID)){
         return message.reply("Don't try me bru").then(m => m.delete(10000))
     }
+
+    var user = await message.mentions.users.first();
+    if (user != undefined)
+        searchUserById(user, message);
+
+
     if (args[0] == undefined){
         allesOphalenDb(bot);
     }
     else{
-        userOphalen(bot, args[0], message)
+        userOphalen(bot, args[0], message);
     }
 
 
 }
+
+function searchUserById(id, message){
+    con.quer(`select * from users where discordId = "${user.id}"`, (err, rows) => {
+        if(first == undefined)
+            return message.reply(`I didn't find an account linked to ${usernme.tag}`);
+
+        sendEmbeded(message, rows[0]);
+    });
+
+
+
+}
+function sendEmbeded(message, user){
+    var url = config.m3uUrl + "username=" + user.username +  "&password="+user.password+"&type=m3u_plus&output=mpegts"
+    const exampleEmbed = new Discord.RichEmbed()
+        .setColor('#0099ff')
+        .setTitle('Info for user ' + user.username)
+        .addField('Username', user.username, true)
+        .addField('UserId',user.discordId , true)
+        .addField('Password', user.password, true)
+        .addField('Host', config.hostUrl, true)
+        .addField('m3u URL', url, true )
+        .addField('Expire date',user.expiredAt, true)
+        .setTimestamp()
+
+    bot.channels.get(config.logChannelId).send(exampleEmbed)
+    message.reply(exampleEmbed)
+}
+
+
 
 function userOphalen(bot, usernme, message){
 
@@ -31,22 +67,9 @@ function userOphalen(bot, usernme, message){
         var first = result[0];
         //console.log(first);
         if(first == undefined)
-            return message.reply(`I didn't find ${usernme}`)
-        var url = config.m3uUrl + "username=" + first.username +  "&password="+first.password+"&type=m3u_plus&output=mpegts"
-        const exampleEmbed = new Discord.RichEmbed()
-            .setColor('#0099ff')
-            .setTitle('Info for user ' + first.username)
-            .addField('Username', first.username, true)
-            .addField('UserId',first.discordId , true)
-            .addField('Password', first.password, true)
-            .addField('Host', config.hostUrl, true)
-            .addField('m3u URL', url, true )
-            .addField('Expire date',first.expiredAt, true)
-            .setTimestamp()
+            return message.reply(`I didn't find ${usernme}`);
 
-        bot.channels.get(config.logChannelId).send(exampleEmbed)
-        message.reply(exampleEmbed)
-        
+        sendEmbeded(message, first);
       });
       
 }
