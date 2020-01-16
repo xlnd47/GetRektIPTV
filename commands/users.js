@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args, conn) => {
 
     var user = await message.mentions.users.first();
     if (user != undefined)
-        return searchUserById(user, message);
+        return searchUserById(user, message, bot);
 
 
     if (args[0] == undefined){
@@ -29,19 +29,19 @@ module.exports.run = async (bot, message, args, conn) => {
 
 }
 
-function searchUserById(user, message){
+function searchUserById(user, message, bot){
     con.query(`select * from users where discordId = "${user.id}"`, (err, rows) => {
         if(rows[0] == undefined)
             return message.reply(`I didn't find an account linked to ${user}`);
 
         //console.log(rows[0])
-        sendEmbeded(message, rows[0]);
+        sendEmbeded(message, rows[0], bot);
     });
 
 
 
 }
-function sendEmbeded(message, user){
+function sendEmbeded(message, user, bot){
     var url = config.m3uUrl + "username=" + user.username +  "&password="+user.password+"&type=m3u_plus&output=mpegts"
     const exampleEmbed = new Discord.RichEmbed()
         .setColor('#0099ff')
@@ -70,7 +70,7 @@ function userOphalen(bot, usernme, message){
         if(first == undefined)
             return message.reply(`I didn't find ${usernme}`);
 
-        sendEmbeded(message, first);
+        sendEmbeded(message, first, bot);
       });
       
 }
