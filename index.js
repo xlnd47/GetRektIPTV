@@ -3,11 +3,9 @@ const config = require("./config.json")
 const bot = new Discord.Client();
 const fs = require("fs");
 const mysql = require('mysql');
-
+var con;
 
 bot.commands = new Discord.Collection();
-if(config.token === "setmeplease") return console.log("Set your token up! Go to https://www.discordapp.com/developers and generate a token from a bot user.");
-
 fs.readdir("./commands/", (err, files) => {
 
   if(err) console.log(err);
@@ -31,6 +29,20 @@ var con = mysql.createConnection({
   password: config.dbPassword,
   database : "iptv"
 });
+try {
+  // Connection Setup
+  con = mysql.createConnection({
+      host: "localhost",
+      user: config.dbUser,
+      password: config.dbPassword,
+      database : "iptv",
+      connectTimeout: 1000000
+  });
+} catch (e) {
+  console.error(e);
+}
+
+
 
 bot.on("ready", () => {
   console.log(bot.user.username + " is online.")
