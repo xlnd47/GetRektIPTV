@@ -31,10 +31,11 @@ module.exports.run = async (bot, message, args, conn) => {
 
 function searchUserById(user, message){
     con.query(`select * from users where discordId = "${user.id}"`, (err, rows) => {
-        if(user == undefined)
+        if(rows[0] == undefined)
             return message.reply(`I didn't find an account linked to ${usernme.tag}`);
 
-        sendEmbeded(message, rows[0]);
+        console.log(rows[0])
+        //sendEmbeded(message, rows[0]);
     });
 
 
