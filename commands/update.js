@@ -101,7 +101,7 @@ async function updatenUser(id,plan,message){
             var data = await JSON.parse(body).result
 
 
-            var sql = `update users set expiredAt = FROM_UNIXTIME(${data.expired_at}) where username = ${data.username}`;
+            var sql = `update users set expiredAt = FROM_UNIXTIME(${data.expired_at}) where username = "${data.username}"`;
             con.query(sql, function (err, result) {
               if (err) console.log(err);
               console.log("1 record updated");
