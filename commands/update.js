@@ -32,48 +32,17 @@ module.exports.run = async (bot, message, args, conn) => {
 }
 
 async function updateUser(user, plan,message){
-    var url = 'https://api.bestbuyiptv.store/v1/line/list/'
-    var id = 0
-    var form = {
-        'Line[username]': user
-    }
 
-    var formData = querystring.stringify(form);
-    var contentLength = formData.length;
-    var headers = 
-    {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': contentLength,
-        'Authorization':'Bearer '+ config.apiKey
-    }
-
-    var options = {
-        method: 'GET',
-        body: formData,
-        url: url,
-        headers: headers
-    };
-
-    
-    request(options, callback);    
-    async function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var data = await JSON.parse(body).result.data
-            //console.log(data)
-
-            //var picked = lodash.filter(data, x => x.username == usernme);
-
-            var first = lodash.filter(data, x => x.username == user);
-            var picked = first[0]
-            if (picked == undefined){
-                return message.reply("Couldn't find the user..").then(m => m.delete(20000))
-            }
-            id = picked.id
-            await updatenUser(id, plan,message)
-        }
-    }
+    var sql = `select lineId from users where username = "${user}"`;
+    con.query(sql, function (err, result) {
+        if (err) console.log(err);
+        console.log(result);
+    });
     
 }
+
+
+
 
 async function updatenUser(id,plan,message){
     var url = 'https://api.bestbuyiptv.store/v1/line/update'
