@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args, conn) => {
 }
 
 function searchUserById(user, message){
-    con.quer(`select * from users where discordId = "${user.id}"`, (err, rows) => {
+    con.query(`select * from users where discordId = "${user.id}"`, (err, rows) => {
         if(first == undefined)
             return message.reply(`I didn't find an account linked to ${usernme.tag}`);
 
