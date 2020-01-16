@@ -37,10 +37,22 @@ function searchUserById(user, message, bot){
         //console.log(rows[0])
         sendEmbeded(message, rows[0], bot);
     });
-
-
-
 }
+
+function userOphalen(bot, usernme, message){
+
+    con.query("SELECT * FROM users WHERE username = '" + usernme +"'", function (err, result, fields) {
+        if (err) console.log(err);
+  
+        var first = result[0];
+        //console.log(first);
+        if(first == undefined)
+            return message.reply(`I didn't find ${usernme}`);
+
+        sendEmbeded(message, first, bot);
+      });
+}
+
 function sendEmbeded(message, user, bot){
     var url = config.m3uUrl + "username=" + user.username +  "&password="+user.password+"&type=m3u_plus&output=mpegts"
     const exampleEmbed = new Discord.RichEmbed()
@@ -57,25 +69,6 @@ function sendEmbeded(message, user, bot){
     bot.channels.get(config.logChannelId).send(exampleEmbed)
     message.reply(exampleEmbed)
 }
-
-
-
-function userOphalen(bot, usernme, message){
-
-    con.query("SELECT * FROM users WHERE username = '" + usernme +"'", function (err, result, fields) {
-        if (err) console.log(err);
-  
-        var first = result[0];
-        //console.log(first);
-        if(first == undefined)
-            return message.reply(`I didn't find ${usernme}`);
-
-        sendEmbeded(message, first, bot);
-      });
-      
-}
-
-
 
 function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
