@@ -55,9 +55,11 @@ async function allesOphalen(bot){
         if (!error && response.statusCode == 200) {
             var result = await JSON.parse(response.body).result
             var data = await result.data
-            var sql = "INSERT INTO users(username, password, expiredAt) VALUES "
+            var sql = "INSERT INTO users(username, password, expiredAt, lineId) VALUES "
             for (var i = 0; i < data.length; i++){
-                sql += "('" + data[i].username + "','"+data[i].password+"',FROM_UNIXTIME("+ data[i].expired_at + ")),";
+                //sql += "('" + data[i].username + "','"+data[i].password+"',FROM_UNIXTIME("+ data[i].expired_at + ")),";
+                sql += `("${data[i].username}", "${data[i].password}", FROM_UNIXTIME(${data[i].expired_at}), "${data[i].id}" ),`;
+
             } 
             console.log(sql);
 
