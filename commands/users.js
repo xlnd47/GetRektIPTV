@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args, conn) => {
 function searchUserById(user, message){
     con.query(`select * from users where discordId = "${user.id}"`, (err, rows) => {
         if(rows[0] == undefined)
-            return message.reply(`I didn't find an account linked to ${user.tag}`);
+            return message.reply(`I didn't find an account linked to @${user.tag}`);
 
         //console.log(rows[0])
         sendEmbeded(message, rows[0]);
