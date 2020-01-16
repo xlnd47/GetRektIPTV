@@ -35,14 +35,14 @@ allesOphalen(bot);
 }
 
 async function allesOphalen(bot){
-    var url = 'https://api.bestbuyiptv.store/v1/line/list/'
+    var url = 'https://api.bestbuyiptv.store/v1/line/list?limit=64'
     var headers = 
     {
          'Authorization':'Bearer' + config.apiKey
     }
     var options = {
         'method': 'GET',
-        'url': 'https://api.bestbuyiptv.store/v1/line/list',
+        url,
         'headers': {
           'Authorization': 'Bearer nx1Iq4wDIE39F0bwiE2pmN0-EHHy7giq',
           'Content-Type': 'application/x-www-form-urlencoded',
