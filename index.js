@@ -4,6 +4,7 @@ const bot = new Discord.Client();
 const fs = require("fs");
 const mysql = require('mysql');
 var con;
+var pool;
 
 bot.commands = new Discord.Collection();
 fs.readdir("./commands/", (err, files) => {
@@ -23,21 +24,27 @@ jsfile.forEach((f, i) =>{
 });
 
 });
-var con = mysql.createConnection({
-  host: "localhost",
-  user: config.dbUser,
-  password: config.dbPassword,
-  database : "iptv"
-});
 try {
   // Connection Setup
-  con = mysql.createConnection({
-      host: "localhost",
-      user: config.dbUser,
-      password: config.dbPassword,
-      database : "iptv",
-      connectTimeout: 1000000
+  pool = mysql.createPool({
+    host: "localhost",
+    user: config.dbUser,
+    password: config.dbPassword,
+    database : "foamer"
   });
+
+
+  pool.getConnection(function(err, connection) {
+    if(err){
+      console.log(err);
+      callback(true);
+      return;
+    };
+    con = connection;
+
+  });
+
+
 } catch (e) {
   console.error(e);
 }
