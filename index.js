@@ -30,7 +30,7 @@ try {
     host: "localhost",
     user: config.dbUser,
     password: config.dbPassword,
-    database : "foamer"
+    database : "iptv"
   });
 
 
