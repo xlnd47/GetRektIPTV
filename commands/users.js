@@ -74,7 +74,7 @@ function allesOphalenDb(bot){
     con.query("SELECT * FROM users", function (err, result, fields) {
       if (err) console.log(err);
       var fields = new Array();
-
+      console.log(result);
       result.forEach(x => {
           fields.push(
             {
