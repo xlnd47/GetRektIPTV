@@ -20,11 +20,31 @@ module.exports.run = async (bot, message, args, conn) => {
     if (args[1] == undefined){
         return message.reply("Geef mij een plan bru").then(m => m.delete(10000))
     }
-    var user = args[0]
+    var user;
     var plan = args[1]
+    user = await message.mentions.users.first();
+    if (user != undefined)
+        return updateByUserId(user, message, plan);
+
+
+    user = args[0]
     await updateUser(user, plan,message)
 
 }
+
+function updateByUserId(user, message, plan){
+    let sql = `select lineId from users where discordId = "${user.id}"`
+    con.query(sql, function(err, result) {
+        if (err) console.log(err);
+        if (result.length < 1)
+            return message.reply("didn't find an account linked to this user");
+
+        updatenUser(result[0].lineId, plan, message)
+    });
+
+
+}
+
 
 async function updateUser(user, plan,message){
 
