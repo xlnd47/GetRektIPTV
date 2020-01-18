@@ -54,7 +54,9 @@ function userOphalen(bot, usernme, message){
 }
 
 function sendEmbeded(message, user, bot){
-    var url = config.m3uUrl + "username=" + user.username +  "&password="+user.password+"&type=m3u_plus&output=mpegts"
+    var url = config.m3uUrl + "username=" + user.username +  "&password="+user.password+"&type=m3u_plus&output=mpegts";
+    var epgUrl = `http://premium-iptv.link:6969/xmltv.php?username=${user.username}&password=${user.password}`;
+    
     const exampleEmbed = new Discord.RichEmbed()
         .setColor('#0099ff')
         .setTitle('Info for user ' + user.username)
@@ -63,6 +65,7 @@ function sendEmbeded(message, user, bot){
         .addField('Password', user.password, true)
         .addField('Host', config.hostUrl, true)
         .addField('m3u URL', url, true )
+        .addField('epg URL', epgUrl, true )
         .addField('Expire date',user.expiredAt, true)
         .setTimestamp()
 

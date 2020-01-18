@@ -112,7 +112,8 @@ async function sendEmbededUsername(bot, result, message){
 
     //console.log(result)
     var expiredate = toHumanDate(result.expired_at);
-    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts"
+    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts";
+    var epgUrl = `http://premium-iptv.link:6969/xmltv.php?username=${result.username}&password=${result.password}`;
     //console.log(expiredate)
      const exampleEmbed = new Discord.RichEmbed()
          .setColor('#0099ff')
@@ -122,6 +123,7 @@ async function sendEmbededUsername(bot, result, message){
          .addField('Password', result.password, true)
          .addField('Host', config.hostUrl, true)
          .addField('m3u URL', url, true )
+         .addField('epg URL', epgUrl, true )
          .addField('Expire date',expiredate, true)
          .setTimestamp()
 
@@ -152,7 +154,8 @@ async function sendEmbeded(bot, id, result, message){
 
     //console.log(result)
     var expiredate = toHumanDate(result.expired_at);
-    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts"
+    var url = config.m3uUrl + "username=" + result.username +  "&password="+result.password+"&type=m3u_plus&output=mpegts";
+    var epgUrl = `http://premium-iptv.link:6969/xmltv.php?username=${result.username}&password=${result.password}`;
     //console.log(expiredate)
      const exampleEmbed = new Discord.RichEmbed()
          .setColor('#0099ff')
@@ -162,6 +165,7 @@ async function sendEmbeded(bot, id, result, message){
          .addField('Password', result.password, true)
          .addField('Host', config.hostUrl, true)
          .addField('m3u URL', url, true )
+         .addField('epg URL', epgUrl, true )
          .addField('Expire date',expiredate, true)
          .setTimestamp()
      const privatedEmbed = new Discord.RichEmbed()
@@ -171,6 +175,7 @@ async function sendEmbeded(bot, id, result, message){
          .addField('Password', result.password, true)
          .addField('Host', config.hostUrl, true)
          .addField('m3u URL', url, true )
+         .addField('epg URL', epgUrl, true )
          .addField('Expire date',expiredate, true)
          .setTimestamp()
     
