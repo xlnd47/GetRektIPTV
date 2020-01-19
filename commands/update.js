@@ -36,7 +36,7 @@ function updateByUserId(user, message, plan){
     let sql = `select lineId from users where discordId = "${user.id}"`
     con.query(sql, function(err, result) {
         if (err) console.log(err);
-        if (result.length < 1)
+        if (result[0] == undefined)
             return message.reply("didn't find an account linked to this user");
 
         updatenUser(result[0].lineId, plan, message)
