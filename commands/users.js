@@ -7,7 +7,8 @@ const mysql = require('mysql');
 var con;
 
 module.exports.run = async (bot, message, args, conn) => {
-  //this is where the actual code for the command goes
+    //this is where the actual code for the command goes
+    //random text for update
     await message.delete()
     con = conn;
     if (!message.member.roles.has(config.devID)){
