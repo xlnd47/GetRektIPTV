@@ -4,6 +4,9 @@ var con;
 
 module.exports.run = async (bot, message, args, conn) => {
     //this is where the actual code for the command goes
+
+    await message.delete()
+
     con = conn;
     var user = await message.mentions.users.first();
     if (user == undefined){
