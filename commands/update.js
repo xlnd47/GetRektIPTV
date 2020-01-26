@@ -101,9 +101,6 @@ async function updatenUser(id,plan,message){
             
         }
     }
-
-
-
 }
 
 function giveCustomerRoll(){
@@ -117,13 +114,13 @@ function giveCustomerRoll(){
     });
 
 
-    var user  = await message.mentions.users.first();
+    var user  = message.mentions.users.first();
     if (user != undefined){
         user.addRole(role).catch(console.error);
     }else {
 
         //sql zoeken naar discordId 
-        
+
     }
 }
 
