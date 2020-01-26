@@ -5,9 +5,11 @@ const querystring = require('querystring');
 const lodash = require('lodash');
 var con;
 var customerRollId;
+var message;
 
-module.exports.run = async (bot, message, args, conn) => {
+module.exports.run = async (bot, messagee, args, conn) => {
   //this is where the actual code for the command goes
+  message = messagee;
   await message.delete()
     con = conn;
   if (!message.member.roles.has(config.devID)){
@@ -40,6 +42,8 @@ function updateByUserId(user, message, plan){
             return message.reply("didn't find an account linked to this user");
 
         updatenUser(result[0].lineId, plan, message)
+
+
     });
 
 
@@ -97,10 +101,30 @@ async function updatenUser(id,plan,message){
             
         }
     }
+
+
+
 }
 
 function giveCustomerRoll(){
 
+    var sql = `SELECT config.value FROM iptv.config where config.name = 'iptvCustomerRollId'`;
+    var role;
+
+    con.query(sql, function (err, result) {
+        if (err) console.log(err);
+        role = message.guild.roles.get(result[0].value);
+    });
+
+
+    var user  = await message.mentions.users.first();
+    if (user != undefined){
+        user.addRole(role).catch(console.error);
+    }else {
+
+        //sql zoeken naar discordId 
+        
+    }
 }
 
 function getPackage(plan){

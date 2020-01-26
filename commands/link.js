@@ -7,6 +7,10 @@ module.exports.run = async (bot, message, args, conn) => {
 
     await message.delete()
 
+    if (!message.member.roles.has(config.devID)){
+        return message.reply("Don't try me bru").then(m => m.delete(10000))
+    }
+    
     con = conn;
     var user = await message.mentions.users.first();
     if (user == undefined){
