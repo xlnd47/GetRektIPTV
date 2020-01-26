@@ -116,7 +116,9 @@ function giveCustomerRoll(){
 
     var user  = message.mentions.users.first();
     if (user != undefined){
-        user.addRole(role).catch(console.error);
+        let member = message.guild.members.get(user.id);
+        member.addRole(role);
+        //user.addRole(role).catch(console.error);
     }else {
 
         //sql zoeken naar discordId 
