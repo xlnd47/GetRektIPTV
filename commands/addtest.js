@@ -71,7 +71,8 @@ async function makeTrialWithUsername(bot, username, message){
             var result = await JSON.parse(body).result
             await sendEmbededUsername(bot, result, message);
         } else {
-        bot.channels.get(config.logChannelId).send("Fout bij API call...")
+            bot.channels.get(config.logChannelId).send("Fout bij API call...")
+            console.log(error);
 
         }
       }
@@ -111,7 +112,8 @@ async function makeTrial(bot, id, message){
             var result = await JSON.parse(body).result
             await sendEmbeded(bot, id, result, message);
         } else {
-        bot.channels.get(config.logChannelId).send("Fout bij API call...")
+            bot.channels.get(config.logChannelId).send("Fout bij API call...")
+            console.log(error);
 
         }
       }
