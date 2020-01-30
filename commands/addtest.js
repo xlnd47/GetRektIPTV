@@ -67,7 +67,7 @@ async function makeTrialWithUsername(bot, username, message){
 
     request(options, callback);    
     async function callback(error, response, body) {
-        console.log(apitoken);
+        console.log(apiToken);
         console.log(response);
         if (!error && response.statusCode == 200) {
             var result = await JSON.parse(body).result
