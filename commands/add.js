@@ -103,7 +103,6 @@ async function makeTrial(bot, id, message){
             await sendEmbeded(bot, id, result, message);
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
-
         }
       }
 }
