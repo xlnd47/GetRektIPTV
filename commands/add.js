@@ -108,7 +108,7 @@ async function makeTrial(bot, id, message){
                 var result = await JSON.parse(body).result
                 await sendEmbeded(bot, id, result, message);
             }else {
-                message.reply("username already exists");
+                message.reply("this user has an account, pls check");
             }
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
