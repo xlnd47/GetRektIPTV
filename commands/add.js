@@ -110,8 +110,8 @@ async function makeTrial(bot, id, message){
         if (!error && response.statusCode == 200) {
 
             //check hier of account al bestaat
-            console.log(`message: ${response.body}`);
             var resmessage = await JSON.parse(body).message;
+            console.log(`message: ${resmessage}`);
 
             // var result = await JSON.parse(body).result
             // await sendEmbeded(bot, id, result, message);
