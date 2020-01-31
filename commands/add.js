@@ -110,20 +110,18 @@ async function makeTrial(bot, id, message){
         if (!error && response.statusCode == 200) {
 
             //check hier of account al bestaat
-            // console.log(`response.body: ${response.body}`);
-            // var string = JSON.stringify(response.body);
-            // var objectValue = JSON.parse(string);
-            // console.log(`message: ${objectValue['message']}`);
+            console.log(`response.body: ${response.body}`);
+            var message = await JSON.parse(body).message;
 
-            var result = await JSON.parse(body).result
-            await sendEmbeded(bot, id, result, message);
-            
-            // if (objectValue['message'] == "OK"){
-            //     var result = await JSON.parse(body).result
-            //     await sendEmbeded(bot, id, result, message);
-            // }else {
-            //     message.reply("this user has an account, pls check");
-            // }
+            // var result = await JSON.parse(body).result
+            // await sendEmbeded(bot, id, result, message);
+
+            if (message == "OK"){
+                var result = await JSON.parse(body).result
+                await sendEmbeded(bot, id, result, message);
+            }else {
+                message.reply("this user has an account, pls check");
+            }
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
         }
