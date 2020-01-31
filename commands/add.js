@@ -104,7 +104,8 @@ async function makeTrial(bot, id, message){
     request(options, callback);    
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(`response.body['message']: ${response.body['message']}`);
+
+            console.log(`response: ${response}`);
             if (body.message == "OK"){
                 var result = await JSON.parse(body).result
                 await sendEmbeded(bot, id, result, message);
