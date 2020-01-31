@@ -110,9 +110,9 @@ async function makeTrial(bot, id, message){
 
             var string = JSON.stringify(response.body);
             var objectValue = JSON.parse(string);
-            console.log(`message: ${objectValue.message}`);
+            console.log(`message: ${objectValue['message']}`);
 
-            if (body.message == "OK"){
+            if (objectValue['message'] == "OK"){
                 var result = await JSON.parse(body).result
                 await sendEmbeded(bot, id, result, message);
             }else {
