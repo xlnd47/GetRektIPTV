@@ -59,16 +59,16 @@ async function makeTrialWithUsername(bot, username, message){
     request(options, callback);    
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
-            //check hier of account al bestaat
-            var result = await JSON.parse(body).result
-            await sendEmbededUsername(bot, result, message);
 
-            // if (body.message == "OK"){
-            //     var result = await JSON.parse(body).result
-            //     await sendEmbededUsername(bot, result, message);
-            // }else {
-            //     message.reply("username already exists");
-            // }
+            var resmessage = await JSON.parse(body).message;
+            // console.log(`message: ${resmessage}`);
+
+            if (resmessage == "OK"){
+                var result = await JSON.parse(body).result
+                await sendEmbededUsername(bot, result, message);
+            }else {
+                message.reply("username already exists");
+            }
             
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
@@ -109,12 +109,7 @@ async function makeTrial(bot, id, message){
     async function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
 
-            //check hier of account al bestaat
             var resmessage = await JSON.parse(body).message;
-            console.log(`message: ${resmessage}`);
-
-            // var result = await JSON.parse(body).result
-            // await sendEmbeded(bot, id, result, message);
 
             if (resmessage == "OK"){
                 var result = await JSON.parse(body).result
