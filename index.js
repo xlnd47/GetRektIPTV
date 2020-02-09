@@ -7,7 +7,7 @@ const dialogflow = require('dialogflow');
 const uuid = require('uuid');
 var con;
 var pool;
-var projectId = "getrektiptv-qsbmxj";
+var projectId;
 var dialogChannel;
 
 bot.commands = new Discord.Collection();
@@ -46,11 +46,11 @@ try {
     };
     con = connection;
 
-    // let sql = `select value from config where name = "dialogflowId"`;
-    // con.query(sql, function(err, result) {
-    //   if (err) console.log(err);
-    //   projectId = result[0].value;
-    // })
+    let sql = `select value from config where name = "dialogflowId"`;
+    con.query(sql, function(err, result) {
+      if (err) console.log(err);
+      projectId = result[0].value;
+    })
 
     let sql2 = `select value from config where name = "dialogtest"`;
     con.query(sql2, function(err, result) {
