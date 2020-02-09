@@ -127,7 +127,7 @@ async function sendDialogFlow(message){
   const sessionId = uuid.v4();
 
   //new session maken
-  const sessionClient = new dialogflow.SessionClient();
+  const sessionClient = new dialogflow.SessionsClient();
   const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
   //text query request
