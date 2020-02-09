@@ -121,7 +121,7 @@ function updateUserList(){
 }
 
 async function sendDialogFlow(message){
-
+  console.log(projectId);
 
   //unique indentiefier for given session
   const sessionId = uuid.v4();
