@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args, conn) => {
     let sql = `update users set discordId = '${user.id}' where username = '${args[1]}'`;
 
     con.query(sql, function (err, result) {
-        if (err) return message.reply("Failed to link, check problem.")
+        if (err) return message.reply(`Failed to link, check problem. \nerror: ${err} \nresult:${result}`)
 
 
         message.reply("Linked");
