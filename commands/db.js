@@ -62,11 +62,7 @@ async function allesOphalen(bot){
 
 
             con.query(sql, function (err, result) {
-              if (err) return message.reply(`Failed to link, check problem. \nerror: ${err} \nresult:${result}`)
-      
-      
-              message.reply("Linked");
-              bot.channels.get(config.logChannelId).send(`Linked ${args[1]} with discordId ${user.id}`);
+              if (err) return message.reply(`Failed`)
           });
 
         } else {
