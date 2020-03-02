@@ -2,19 +2,16 @@ const Discord = require('discord.js');
 const request = require('request');
 const config = require("../config.json");
 const mysql = require('mysql');
-var users = new Array();;
+var users = new Array();
+var con;
 
 
-module.exports.run = async (bot, message, args, con) => {
+module.exports.run = async (bot, message, args, conn) => {
   //this is where the actual code for the command goes
   await message.delete()
 
-  var con = mysql.createConnection({
-    host: "localhost",
-    user: config.dbUser,
-    password: config.dbPassword,
-    database : "iptv"
-  });
+  con = conn;
+
 allesOphalen(bot);
 
 //   con.connect(function(err) {
@@ -62,7 +59,16 @@ async function allesOphalen(bot){
 
             } 
             console.log(sql);
+            sql = sql.substring(0, str.length - 1);
 
+
+            con.query(sql, function (err, result) {
+              if (err) return message.reply(`Failed to link, check problem. \nerror: ${err} \nresult:${result}`)
+      
+      
+              message.reply("Linked");
+              bot.channels.get(config.logChannelId).send(`Linked ${args[1]} with discordId ${user.id}`);
+          });
 
         } else {
         bot.channels.get(config.logChannelId).send("Fout bij API call...")
