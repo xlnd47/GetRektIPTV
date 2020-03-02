@@ -59,7 +59,7 @@ async function allesOphalen(bot){
 
             } 
             console.log(sql);
-            sql = sql.substring(0, str.length - 1);
+            sql = sql.substring(0, sql.length - 1);
 
 
             con.query(sql, function (err, result) {
