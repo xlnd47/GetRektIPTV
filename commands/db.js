@@ -32,7 +32,7 @@ allesOphalen(bot);
 }
 
 async function allesOphalen(bot){
-    var url = 'https://api.bestbuyiptv.store/v1/line/list?limit=64'
+    var url = 'https://api.bestbuyiptv.store/v1/line/list?limit=1000'
     var headers = 
     {
          'Authorization':'Bearer' + config.apiKey
@@ -42,10 +42,9 @@ async function allesOphalen(bot){
         url,
         'headers': {
           'Authorization': 'Bearer nx1Iq4wDIE39F0bwiE2pmN0-EHHy7giq',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'limit': '1000'
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
-      };
+    };
 
     request(options, callback);    
     async function callback(error, response) {
