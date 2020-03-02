@@ -46,7 +46,7 @@ async function allesOphalen(bot){
         'headers': {
           'Authorization': 'Bearer nx1Iq4wDIE39F0bwiE2pmN0-EHHy7giq',
           'Content-Type': 'application/x-www-form-urlencoded',
-          'limit': '100'
+          'limit': '1000'
         }
       };
 
