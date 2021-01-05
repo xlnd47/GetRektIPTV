@@ -9,7 +9,7 @@
   "author": "Ned from {TheSourceCode}",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "discord.js": "^11.5.1",
     "discord.js-giveaway": "^1.0.2",
     "fs": "0.0.1-security",
